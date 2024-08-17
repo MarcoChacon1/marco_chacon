@@ -1,29 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
-    <link rel="stylesheet" href="style.css">
-    <title>Marco Alessandro Chacon Carmona</title>
+    <title>MACC - Calidad y eficiencia en cada línea de código</title>
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #000000 60%,
+          #ffa500 30%,
+          #ffd700 10%
+        );
+        color: #fff;
+        scroll-behavior: smooth;
+      }
+
+      header {
+        background: linear-gradient(
+          90deg,
+          #000000 60%,
+          #ffa500 30%,
+          #ffd700 10%
+        );
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 02px10pxrgba (0, 0, 0, 0.5);
+        transition: background 0.3s ease;
+      }
+
+      header.scrolled {
+        background: #000;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2em;
+        color: #ffffff;
+        text-shadow: 1px1px2px#000;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav ul li {
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: #000000;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        text-shadow: 1px1px2px#000;
+      }
+
+      nav ul i a:hover {
+        color: #ffa500;
+      }
+
+      #image {
+        translate: 0 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #image img {
+        width: 550px;
+        height: 250px;
+      }
+
+      .hero {
+        height: 100vh;
+        background: linear-gradient(135deg, #000000 60%, #ffa500 30%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px1px2px#000;
+        animation: fadeIn 2s ease;
+      }
+
+      .hero h2 {
+        font-size: 3em;
+        margin: 0;
+        animation: slideIn 1.5s ease forwards;
+        opacity: 0;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .profile {
+        background: linear-gradient(135deg, #333 60%, #ffa500 30%);
+        padding: 60px 20px;
+        text-align: center;
+        border-radius: 10px;
+        margin: 40px auto;
+        max-width: 800px;
+        color: #fff;
+        text-shadow: 1px1px2px#000;
+        animation: fadeInUp 1s ease forwards;
+        opacity: 0;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .profil eh2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+
+      .profile p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        text-shadow: 1px1px2px#000;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .profile p:hover {
+        transform: scale(1.05);
+        color: #ffd700;
+      }
+
+      .portfolio {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 40px20px;
+        background: linear-gradient(
+          135deg,
+          #000000 60%,
+          #ffa500 30%,
+          #ffd700 10%
+        );
+      }
+
+      .project {
+        background: linear-gradient(135deg, #333 60%, #ffa500 30%);
+        border-radius: 15px;
+        margin: 20px;
+        padding: 20px;
+        width: 300px;
+        color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 04px20pxrgba (0, 0, 0, 0.3);
+        text-align: center;
+        animation: fadeInUp 1.5s ease forwards;
+        opacity: 0;
+      }
+
+      .project:hover {
+        transform: scale(1.1) rotate(3deg);
+        box-shadow: 010px30pxrgba (0, 0, 0, 0.5);
+      }
+
+      .project h3 {
+        font-size: 1.5em;
+        color: #fff;
+        text-shadow: 1px1px2px#000;
+      }
+
+      .project p {
+        font-size: 1em;
+        color: #fff;
+        text-shadow: 1px1px2px#000;
+      }
+
+      .project a {
+        color: #ffd700;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      .project a:hover {
+        color: #ffa500;
+      }
+
+      .contact-form {
+        background: linear-gradient(135deg, #444 60%, #ffa500 30%);
+        padding: 40px;
+        max-width: 600px;
+        margin: 40px auto;
+        border-radius: 10px;
+        box-shadow: 04px20pxrgba (0, 0, 0, 0.3);
+        animation: fadeInUp 2s ease forwards;
+        opacity: 0;
+      }
+
+      .contact-form h3 {
+        margin-bottom: 20px;
+        font-size: 2em;
+        color: #fff;
+        text-shadow: 1px1px2px#000;
+      }
+
+      .contact-form label {
+        display: block;
+        margin-bottom: 10px;
+        color: #fff;
+        text-shadow: 1px1px2px#000;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 02px10pxrgba (0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        box-shadow: 04px15pxrgba (0, 0, 0, 0.5);
+        outline: none;
+      }
+
+      .contact-form button {
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #ffa500, #ffd700);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 04px15pxrgba (0, 0, 0, 0.3);
+        transition: background 0.3s ease, transform 0.3s ease,
+          box-shadow 0.3s ease;
+        background-size: 200%200%;
+        animation: gradientShift 3s ease infinite;
+      }
+
+      .contact-form button:hover {
+        background-position: right center;
+        transform: translateY(-3px);
+        box-shadow: 08px20pxrgba (0, 0, 0, 0.5);
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: left center;
+        }
+        50% {
+          background-position: right center;
+        }
+        100% {
+          background-position: left center;
+        }
+      }
+
+      .footer {
+        background: linear-gradient(135deg, #333 60%, #ffa500 30%);
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+        border-top: 3px solid #ffa500;
+        text-shadow: 1px1px2px#000;
+        animation: fadeInUp 2.5s ease forwards;
+        opacity: 0;
+      }
+
+      .footer a {
+        color: #ffd700;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .footer a:hover {
+        color: #ffa500;
+      }
+
+      @media (max-width: 600px) {
+        .heroh2 {
+          font-size: 2em;
+        }
+
+        .profileh2 {
+          font-size: 2em;
+        }
+
+        .project {
+          width: 90%;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
-
   <body>
-    <header>
-        <section></section>
-        <section></section>
+    <header id="header">
+      <h1>MACC</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#hero">Inicio</a>
+          </li>
+          <li>
+            <a href="#about">Sobre mí</a>
+          </li>
+          <li>
+            <a href="#portfolio">Portafolio</a>
+          </li>
+          <li>
+            <a href="#contact">Contacto</a>
+          </li>
+        </ul>
+      </nav>
     </header>
+    <section id="image">
+        <img src="./img/logo.png" alt="Logo">
+    </section>
+    <section id="hero" class="hero">
+      <div>
+        <h2>Calidad y eficiencia en cada línea de código</h2>
+      </div>
+    </section>
+    <section id="about" class="profile">
+      <h2>Sobre mí</h2>
+      <p>
+        ¡Hola! Soy un apasionado desarrollador de software con una fuerte
+        inclinación hacia el desarrollo Back-End. Mi viaje en el mundo de la
+        programación comenzó con la curiosidad de entender cómo funcionan las
+        cosas detrás de escena, lo que me llevó a especializarme en ASP.NET y
+        NodeJS. Me encanta resolver problemas complejos y transformar ideas en
+        soluciones eficientes y funcionales.
+      </p>
+      <p>
+        Además de mis conocimientos técnicos en bases de datos SQL y NoSQL, y la
+        implementación de APIs RESTful, disfruto aprendiendo nuevas tecnologías
+        y mejorando constantemente mis habilidades. Fuera del mundo del código,
+        soy una persona que valora el trabajo en equipo, la colaboración y
+        siempre estoy dispuesto a enfrentar nuevos desafíos.
+      </p>
+    </section>
+    <section id="portfolio" class="portfolio">
+      <div class="project">
+        <h3>Proyecto 1</h3>
+        <p>Grupo 2 Proyecto 2 - Desarrollo de software colaborativo.</p>
+        <a
+          href="https://github.com/Jose-Andres-76/Grupo2Proyecto2"
+          target="_blank"
+          >Ver en GitHub</a
+        >
+      </div>
+      <div class="project">
+        <h3>Proyecto 2</h3>
+        <p>Proyecto Estructuras - Implementación de estructuras de datos.</p>
+        <a
+          href="https://github.com/MarcoChacon1/ProyectoEstructuras"
+          target="_blank"
+          >Ver en GitHub</a
+        >
+      </div>
+      <div class="project">
+        <h3>Proyecto 2</h3>
+        <p>Poryecto de Bolsa de Empleo - AgileWare Solutions</p>
+        <a
+          href="https://github.com/AleChacon34/AgileWare-Solutions---Proyecto"
+          target="_blank"
+          >Ver en GitHub</a
+        >
+      </div>
+      <div class="project">
+        <h3>Proyecto 2</h3>
+        <p>Videojuego de Cartas</p>
+        <a
+          href="https://github.com/ealpizr/godot-cards"
+          target="_blank"
+          >Ver en GitHub</a
+        >
+      </div>
+    </section>
+    <section id="contact" class="contact-form">
+      <h3>Contacto</h3>
+      <form action="https://formspree.io/f/{your-form-id}" method="POST">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message" rows="5" required> </textarea>
 
-    <main>
-        <section></section>
-        <section></section>
-        <section></section>
-    </main>
-
-    <footer>
-        <section></section>
-        <section></section>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+    <footer class="footer">
+      <p>&copy; 2024 MACC. Todos los derechos reservados.</p>
+      <p>
+        Contacto:
+        <a href="mailto:info@macc.com">info@macc.com</a>
+      </p>
     </footer>
+    <script>
+      // Navegación suavedocument.querySelectorAll("nav ul li a").forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+          behavior: "smooth",
+        });
+      });
 
+      // Cambiar color de la cabecera al hacer scrollwindow.addEventListener('scroll', function () {
+      const header = document.getElementById("header");
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    </script>
   </body>
 </html>
